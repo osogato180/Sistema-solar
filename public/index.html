@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Libro del sistema solar con RA</title>
+  <title>Libro de Contaminación Ambiental con RA</title>
 
   <link rel="stylesheet" href="css/estilos.css">
 
@@ -18,25 +18,36 @@
 
 <body>
   <section id="panel" aria-label="Controles del libro">
-    <label for="pagina">Página del libro</label>
+    <header>
+        <small>AULA ABIERTA · CIENCIA Y PLANETA</small>
+        <h1>Contaminación Ambiental</h1>
+        <p>Explorando nuestro entorno con Realidad Aumentada</p>
+    </header>
+
+    <label for="pagina">Explora una escena</label>
 
     <select id="pagina">
-      <option value="1">1 El Sol</option>
-      <option value="2">2 Planetas rocosos</option>
-      <option value="3">3 Planetas gigantes</option>
-      <option value="4">4 Rotación y traslación</option>
-      <option value="5">5 El sistema completo</option>
+      <option value="1">01 · ¿Qué es la contaminación?</option>
+      <option value="2">02 · Fuentes y causas principales</option>
+      <option value="3">03 · Consecuencias en el ecosistema</option>
+      <option value="4">04 · Prevención y mitigación</option>
+      <option value="5">05 · Desarrollo sostenible</option>
     </select>
 
     <p id="contenido"></p>
 
-    <button id="pausa" type="button">Pausar</button>
+    <div class="parapensar" style="background: rgba(193, 74, 54, 0.08); border-left: 3px solid #c14a36; padding: 8px 10px; margin: 10px 0; border-radius: 4px;">
+        <span class="etiqueta-pensar" style="font-size: 11px; font-weight: bold; color: #c14a36; display: block; margin-bottom: 3px;">PARA PENSAR</span>
+        <p id="pregunta-pensar" style="margin: 0; font-size: 13px;"></p>
+    </div>
+
+    <button id="pausa" type="button">Pausar animación</button>
 
     <p id="estado" role="status">
       Permite la cámara y enfoca Hiro.
     </p>
 
-    <small>Modelo didáctico sin escala real.</small>
+    <small>Modelos didácticos esquemáticos; no representan mediciones científicas.</small>
   </section>
 
   <a-scene

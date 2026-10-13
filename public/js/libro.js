@@ -1,18 +1,17 @@
 const textos = {
-  1: "El Sol es una estrella y aporta energía a la Tierra. " +
-     "Observa el modelo amarillo. ¿Qué lo diferencia de un planeta?",
+    1: "La contaminación ambiental es la presencia de componentes nocivos (químicos, físicos o biológicos) en el entorno que afectan negativamente a los seres vivos.",
+    2: "Las principales fuentes provienen de las emisiones industriales, la quema de combustibles fósiles, el parque automotor y la acumulación masiva de residuos sólidos.",
+    3: "Los efectos directos incluyen el deterioro de la calidad del aire y del agua, el incremento de enfermedades respiratorias y la pérdida grave de biodiversidad.",
+    4: "Las medidas de mitigación abarcan el reciclaje activo, el fomento de energías renovables limpias y la reducción drástica de plásticos de un solo uso.",
+    5: "El desarrollo sostenible busca equilibrar el crecimiento económico y social con la protección y conservación rigurosa de los recursos naturales del planeta."
+};
 
-  2: "Mercurio, Venus, Tierra y Marte son planetas rocosos. " +
-     "Identifica la Tierra azul y ordena los cuatro desde el Sol.",
-
-  3: "Júpiter y Saturno son gigantes gaseosos; Urano y Neptuno, " +
-     "gigantes helados. ¿Qué planeta aparece con un anillo?",
-
-  4: "Rotación es girar sobre el propio eje; traslación es recorrer " +
-     "la órbita. Sigue el punto verde de la Tierra y pulsa Pausar.",
-
-  5: "El sistema solar tiene ocho planetas. Recorre su orden desde " +
-     "el Sol. Plutón se clasifica como planeta enano."
+const preguntas = {
+    1: "¿Qué tipos de contaminación percibes con mayor frecuencia en tu comunidad?",
+    2: "¿Cómo influye el transporte urbano en la emisión de gases contaminantes?",
+    3: "¿De qué manera la contaminación del agua impacta directamente en la salud pública?",
+    4: "¿Qué acciones prácticas puedes implementar desde casa para reducir residuos?",
+    5: "¿Cuál es el rol fundamental de la ciudadanía frente a la crisis climática actual?"
 };
 
 const selector = document.querySelector("#pagina");
@@ -20,14 +19,20 @@ const sistema = document.querySelector("#sistema");
 const estado = document.querySelector("#estado");
 const boton = document.querySelector("#pausa");
 const marcador = document.querySelector("#marcador");
+const contenidoElem = document.querySelector("#contenido");
+const preguntaElem = document.querySelector("#pregunta-pensar");
 
 function mostrarPagina() {
-  document.querySelector("#contenido").textContent = textos[selector.value];
+    const paginaActual = selector.value;
+    contenidoElem.textContent = textos[paginaActual];
+    if (preguntaElem) {
+        preguntaElem.textContent = preguntas[paginaActual];
+    }
 
-  sistema.querySelectorAll("[data-paginas]").forEach(el => {
-    const paginas = el.dataset.paginas.split(" ");
-    el.setAttribute("visible", paginas.includes(selector.value));
-  });
+    sistema.querySelectorAll("[data-paginas]").forEach(el => {
+        const paginas = el.dataset.paginas.split(" ");
+        el.setAttribute("visible", paginas.includes(paginaActual));
+    });
 }
 
 selector.addEventListener("change", mostrarPagina);
@@ -37,25 +42,25 @@ mostrarPagina();
 let enPausa = false;
 
 boton.addEventListener("click", () => {
-  enPausa = !enPausa;
+    enPausa = !enPausa;
 
-  if (enPausa) {
-    sistema.pause();
-  } else {
-    sistema.play();
-  }
+    if (enPausa) {
+        sistema.pause();
+    } else {
+        sistema.play();
+    }
 
-  boton.textContent = enPausa ? "Continuar" : "Pausar";
+    boton.textContent = enPausa ? "Continuar animación" : "Pausar animación";
 });
 
 marcador.addEventListener("markerFound", () => {
-  estado.textContent = "Marcador detectado. Selecciona tu página.";
+    estado.textContent = "Marcador detectado. Selecciona tu página.";
 });
 
 marcador.addEventListener("markerLost", () => {
-  estado.textContent = "Vuelve a enfocar el marcador completo.";
+    estado.textContent = "Vuelve a enfocar el marcador completo.";
 });
 
 window.addEventListener("camera-error", () => {
-  estado.textContent = "Revisa HTTPS, permisos y disponibilidad de cámara.";
+    estado.textContent = "Revisa HTTPS, permisos y disponibilidad de cámara.";
 });
